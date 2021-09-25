@@ -28,9 +28,9 @@ def naive_map(weight, r_on, r_off, scheme, p_l=None):
     torch.Tensor, torch.Tensor
         Positive and negative crossbar weights.
     """
-    print("weights = " weight)
-    print("r_on = ", r_on)
-    print("r_off = "r_off)
+    print("weights = ", weight)
+    print("\n\n r_on = ", r_on)
+    print("\n\n r_off = ",r_off)
     if p_l is not None:
         assert p_l >= 0 and p_l <= 1, "p_l must be None or between 0 and 1."
         weight_max = sorted(weight.abs().flatten().cpu().detach().numpy(), reverse=True)
@@ -39,8 +39,8 @@ def naive_map(weight, r_on, r_off, scheme, p_l=None):
     else:
         weight_max = weight.abs().max()
         weight_min = 0
-    print("weight_max"weight_max)
-    print("weight_min" weight_min)
+    print("\n\n weight_max= ",weight_max)
+    print("\n\n weight_min=" ,weight_min)
     if scheme == memtorch.bh.crossbar.Scheme.DoubleColumn:
         pos = weight.clone()
         neg = weight.clone() * -1
