@@ -127,7 +127,7 @@ def patch_model(
                     **kwargs
                 )
                 if name.__contains__("."):
-                    sequence_container, module, rest= name.split(".",2)
+                    sequence_container, module, *rest= name.split(".")
                     if module.isdigit():
                         module = int(module)
                         model._modules[sequence_container][module] = patched_module
