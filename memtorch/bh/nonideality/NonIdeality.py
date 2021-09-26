@@ -45,7 +45,7 @@ def apply_nonidealities(model, non_idealities, **kwargs):
 
     def apply_patched_module(model, patched_module, name, m):
         if name.__contains__("."):
-            sequence_container, module = name.split(".")
+            sequence_container, module, *rest = name.split(".")
             if module.isdigit():
                 module = int(module)
                 model._modules[sequence_container][module] = patched_module
