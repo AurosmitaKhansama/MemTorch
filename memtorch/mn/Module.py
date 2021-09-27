@@ -91,7 +91,7 @@ def patch_model(
     torch.nn.Module
         Patched torch.nn.Module.
     """
-    # print('hellp')
+    # print('help')
     model.map = mapping_routine
     for i, (name, m) in enumerate(list(model.named_modules())):
         for parameter in module_parameters_to_patch:
