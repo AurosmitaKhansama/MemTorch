@@ -125,6 +125,8 @@ def unpack_parameters(local_args, r_rel_tol=None, r_abs_tol=None, resample_thres
                 )
 
             resample_idx += 1
+            print("\n \n resample idx = ", resample_idx)
+            print("\n \n resample threshold = ", resample_threshold)
             if resample_idx > resample_threshold:
                 raise Exception("Resample threshold exceeded.")
 
