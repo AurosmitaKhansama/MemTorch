@@ -84,7 +84,6 @@ def unpack_parameters(local_args, r_rel_tol=None, r_abs_tol=None, resample_thres
     **
         locals() with sampled stochastic parameters.
     """
-    print("/n /n local args = ", local_args)
     assert (
         r_rel_tol is None or r_abs_tol is None
     ), "r_rel_tol or r_abs_tol must be None."
@@ -107,16 +106,20 @@ def unpack_parameters(local_args, r_rel_tol=None, r_abs_tol=None, resample_thres
         resample_idx = 0
         r_off_generator = local_args_copy["r_off"]
         r_on_generator = local_args_copy["r_on"]
-        print("/n /n before while")
+
         while True:
+            print("/n /n inside while")
             if r_abs_tol is None and r_rel_tol is not None:
                 if not math.isclose(args.r_off, args.r_on, rel_tol=r_rel_tol):
+                    print("/n /n r_rel_tol=", r_rel_tol)
                     break
             elif r_rel_tol is None and r_abs_tol is not None:
                 if not math.isclose(args.r_off, args.r_on, abs_tol=r_abs_tol):
+                    print("/n /n r_abs_tol=", r_abs_tol)
                     break
             else:
                 if not math.isclose(args.r_off, args.r_on):
+                    print("/n /n args.r_off, args.r_on = ", args.r_off, args.r_on)
                     break
 
             if callable(r_off_generator) and callable(r_on_generator):
