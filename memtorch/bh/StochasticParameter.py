@@ -101,10 +101,12 @@ def unpack_parameters(local_args, r_rel_tol=None, r_abs_tol=None, resample_thres
             local_args[arg] = local_args[arg](return_mean=return_mean)
 
     args = Dict2Obj(local_args)
+    print("before if")
     if hasattr(args, "r_off") and hasattr(args, "r_on"):
         resample_idx = 0
         r_off_generator = local_args_copy["r_off"]
         r_on_generator = local_args_copy["r_on"]
+        print("before while")
         while True:
             if r_abs_tol is None and r_rel_tol is not None:
                 if not math.isclose(args.r_off, args.r_on, rel_tol=r_rel_tol):
