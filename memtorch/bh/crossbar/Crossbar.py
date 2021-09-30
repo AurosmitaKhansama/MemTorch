@@ -134,7 +134,7 @@ class Crossbar:
                     self.devices, self.conductance_matrix.detach().cpu()
                 )
             else:
-                print("\n \n conductance_matrix in update = ", conductance_matrix)
+                print("\n \n conductance_matrix in update = ", self.conductance_matrix)
                 if self.tile_shape is not None:
                     for i in range(0, self.devices.shape[0]):
                         for j in range(0, self.devices.shape[1]):
