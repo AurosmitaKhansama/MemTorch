@@ -134,10 +134,10 @@ class Linear(nn.Linear):
             tile_shape=tile_shape,
             use_bindings=use_bindings,
         )
-        print("\n \n crossbar = ", self.crossbars)
+        # print("\n \n crossbar = ", self.crossbars)
         self.transform_output = lambda x: x
         if verbose:
-            print("Patched %s -> %s" % (linear_layer, self))
+             print("Patched %s -> %s" % (linear_layer, self))
 
     def forward(self, input):
         """Method to perform forward propagations.
