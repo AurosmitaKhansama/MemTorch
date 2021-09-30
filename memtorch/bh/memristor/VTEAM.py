@@ -146,6 +146,8 @@ class VTEAM(Memristor):
         conductance = clip(conductance, 1 / self.r_off, 1 / self.r_on)
         self.x = self.d * ((1 / conductance) - self.r_on) / (self.r_off - self.r_on)
         self.g = conductance
+        print("\n \n conductance ", conductance)
+        print("\n \n x = ", self.x)
 
     def plot_hysteresis_loop(
         self,

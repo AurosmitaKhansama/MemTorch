@@ -134,6 +134,7 @@ class Crossbar:
                     self.devices, self.conductance_matrix.detach().cpu()
                 )
             else:
+                print("\n \n conductance_matrix in update = ", conductance_matrix)
                 if self.tile_shape is not None:
                     for i in range(0, self.devices.shape[0]):
                         for j in range(0, self.devices.shape[1]):
@@ -141,13 +142,13 @@ class Crossbar:
                                 self.devices[i][j][k].set_conductance(
                                     self.conductance_matrix[i][j][k].item()
                                 )
+                    print("\n \n devices in update = ", self.devices)
                 else:
                     for i in range(0, self.rows):
                         for j in range(0, self.columns):
                             self.devices[i][j].set_conductance(
                                 self.conductance_matrix[i][j].item()
                             )
-
     def write_conductance_matrix(
         self,
         conductance_matrix,
@@ -200,9 +201,13 @@ class Crossbar:
             .to(self.device)
             .float()
         )
+        print("\n \n max in write_conductance = ", max)
+        print("\n \n min in write_conductance = ", min)
+        print("\n \n conductance matrix in write_conductance before= ", conductance_matrix)
         conductance_matrix = torch.max(
             torch.min(conductance_matrix.to(self.device), max), min
         )
+        print("\n \n conductance matrix in write_conductance after= ", conductance_matrix)
         if transistor:
             self.conductance_matrix = conductance_matrix
             self.max_abs_conductance = (
