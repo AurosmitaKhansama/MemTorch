@@ -103,7 +103,7 @@ def apply_nonidealities(model, non_idealities, **kwargs):
                 elif non_ideality == NonIdeality.Aging:
                     required(
                         kwargs,
-                        ["lrs_proportion", "hrs_proportion", "electroform_proportion, r_off, r_on"],
+                        ["lrs_proportion", "hrs_proportion", "electroform_proportion", "r_off", "r_on"],
                         "memtorch.bh.nonideality.NonIdeality.Aging",
                     )
                     if hasattr(model, "module"):
