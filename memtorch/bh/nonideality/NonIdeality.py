@@ -6,7 +6,7 @@ import torch
 
 import memtorch
 import memtorch.mn
-from memtorch.bh.nonideality.DeviceFaults import apply_aging
+from memtorch.bh.nonideality.Aging import apply_aging
 from memtorch.bh.nonideality.DeviceFaults import apply_device_faults
 from memtorch.bh.nonideality.Endurance import apply_endurance_model
 from memtorch.bh.nonideality.FiniteConductanceStates import (
