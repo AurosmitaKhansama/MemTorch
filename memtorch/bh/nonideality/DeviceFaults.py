@@ -33,11 +33,13 @@ def apply_device_faults(layer, lrs_proportion, hrs_proportion, electroform_propo
             .view(-1)
             .to(device)
         )
+        print("\n \n crossbar_min = ", crossbar_min)
         crossbar_max = (
             torch.tensor(1 / (np.vectorize(lambda x: x.r_on)(crossbar.devices)))
             .view(-1)
             .to(device)
         )
+        print("\n \n crossbar_min = ", crossbar_max)
         crossbar_min_indices = np.random.choice(
             np.arange(torch.numel(crossbar_min)),
             replace=False,
@@ -46,7 +48,9 @@ def apply_device_faults(layer, lrs_proportion, hrs_proportion, electroform_propo
         crossbar_shape = crossbar.conductance_matrix.shape
         crossbar.conductance_matrix = crossbar.conductance_matrix.reshape(-1)
         for index in crossbar_min_indices:
+            print("\n \n index_min = ", index)
             crossbar.conductance_matrix[index] = crossbar_min[index]
+            print("\n \n min conductance_matrix[index] = ", crossbar.conductance_matrix[index])
 
         crossbar_max_indices = np.random.choice(
             np.arange(torch.numel(crossbar_max)),
