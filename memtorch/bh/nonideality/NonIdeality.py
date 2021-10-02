@@ -6,6 +6,7 @@ import torch
 
 import memtorch
 import memtorch.mn
+from memtorch.bh.nonideality.DeviceFaults import apply_aging
 from memtorch.bh.nonideality.DeviceFaults import apply_device_faults
 from memtorch.bh.nonideality.Endurance import apply_endurance_model
 from memtorch.bh.nonideality.FiniteConductanceStates import (
@@ -25,6 +26,7 @@ class NonIdeality(Enum):
     NonLinear = auto()
     Endurance = auto()
     Retention = auto()
+    Aging = auto()
 
 
 def apply_nonidealities(model, non_idealities, **kwargs):
@@ -96,6 +98,38 @@ def apply_nonidealities(model, non_idealities, **kwargs):
                                 kwargs["lrs_proportion"],
                                 kwargs["hrs_proportion"],
                                 kwargs["electroform_proportion"],
+                            ),
+                        )
+                elif non_ideality == NonIdeality.Aging:
+                    required(
+                        kwargs,
+                        ["lrs_proportion", "hrs_proportion", "electroform_proportion, r_off, r_on"],
+                        "memtorch.bh.nonideality.NonIdeality.Aging",
+                    )
+                    if hasattr(model, "module"):
+                        setattr(
+                            model.module,
+                            name,
+                            apply_aging(
+                                m,
+                                kwargs["lrs_proportion"],
+                                kwargs["hrs_proportion"],
+                                kwargs["electroform_proportion"],
+                                kwargs["r_off"],
+                                kwargs["r_on"],
+                            ),
+                        )
+                    else:
+                        setattr(
+                            model,
+                            name,
+                            apply_aging(
+                                m,
+                                kwargs["lrs_proportion"],
+                                kwargs["hrs_proportion"],
+                                kwargs["electroform_proportion"],
+                                kwargs["r_off"],
+                                kwargs["r_on"],
                             ),
                         )
                 elif non_ideality == NonIdeality.NonLinear:
